@@ -19,25 +19,25 @@ public class DiveDay2 {
 
 		FORWARD {
 			@Override
-			public int getAbsoluteValue(int num) {
+			public int getRelativeValue(int num) {
 				return num;
 			}
 		},
 		UP {
 			@Override
-			public int getAbsoluteValue(int num) {
+			public int getRelativeValue(int num) {
 				return -num;
 			}
 
 		},
 		DOWN {
 			@Override
-			public int getAbsoluteValue(int num) {
+			public int getRelativeValue(int num) {
 				return num;
 			}
 		};
 
-		public int getAbsoluteValue(int num) {
+		public int getRelativeValue(int num) {
 			return num;
 		}
 	}
@@ -52,6 +52,7 @@ public class DiveDay2 {
 																 .collect(Collectors.toList());
 
 		System.out.println("part one answer is " + calculatePartOneAnswer(directionUnits));
+		System.out.println("part two answer is " + calculatePartTwoAnswer(directionUnits));
 	}
 
 	private int calculatePartOneAnswer(List<Pair<Directions, Integer>> directionUnits) {
@@ -65,6 +66,24 @@ public class DiveDay2 {
 		return horizontalSum * verticalSum;
 	}
 
+	private int calculatePartTwoAnswer(List<Pair<Directions, Integer>> directionUnits) {
+
+		int aim = 0;
+		int horizontal = 0;
+		int vertical = 0;
+
+		for (Pair<Directions, Integer> du : directionUnits) {
+			if (du.getKey() == Directions.FORWARD) {
+				horizontal += du.getValue();
+				vertical += aim * du.getValue();
+			} else {
+				aim += du.getValue();
+			}
+		}
+
+		return horizontal * vertical;
+	}
+
 	private int calculateSumByDirection(List<Pair<Directions, Integer>> directionUnits, EnumSet<Directions> directionSet) {
 
 		return directionUnits.stream()
@@ -76,7 +95,7 @@ public class DiveDay2 {
 	private Pair<Directions, Integer> createDirectionPair(String[] splitLine) {
 
 		Directions directions = Directions.valueOf(splitLine[0].toUpperCase());
-		Integer unit = directions.getAbsoluteValue(Integer.parseInt(splitLine[1]));
+		Integer unit = directions.getRelativeValue(Integer.parseInt(splitLine[1]));
 		return new ImmutablePair<Directions, Integer>(directions, unit);
 	}
 }
