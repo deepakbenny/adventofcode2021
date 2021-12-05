@@ -7,7 +7,7 @@ public class App {
 
 	public static void main(String[] args) throws IOException {
 
-		SonarSweepDay1 sonarSweepDay1 = new SonarSweepDay1();
-		sonarSweepDay1.process();
+		DiveDay2 diveDay2 = new DiveDay2();
+		diveDay2.process();
 	}
 }
