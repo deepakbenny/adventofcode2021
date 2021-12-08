@@ -7,7 +7,8 @@ public class App {
 
 	public static void main(String[] args) throws IOException {
 
-		DiveDay2 diveDay2 = new DiveDay2();
-		diveDay2.process();
+		AdvofCode2021 app = new BinaryDiagnosticDay3();
+		app.process();
+
 	}
 }

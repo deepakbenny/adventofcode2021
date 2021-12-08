@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 /**
  * @author dbenny
  */
-public class DiveDay2 {
+public class DiveDay2 implements AdvofCode2021{
 
 	private static final String INPUT_FILE = "src/main/resources/DiveInput.txt";
 
@@ -42,17 +42,21 @@ public class DiveDay2 {
 		}
 	}
 
-	public void process() throws IOException {
+	public void process() {
 
-		List<String> fileLines = Files.readAllLines(Paths.get(INPUT_FILE));
+		try {
+			List<String> fileLines = Files.readAllLines(Paths.get(INPUT_FILE));
 
-		List<Pair<Directions, Integer>> directionUnits = fileLines.stream()
-																 .map(line -> line.split(" "))
-																 .map(this::createDirectionPair)
-																 .collect(Collectors.toList());
+			List<Pair<Directions, Integer>> directionUnits = fileLines.stream()
+																	 .map(line -> line.split(" "))
+																	 .map(this::createDirectionPair)
+																	 .collect(Collectors.toList());
 
-		System.out.println("part one answer is " + calculatePartOneAnswer(directionUnits));
-		System.out.println("part two answer is " + calculatePartTwoAnswer(directionUnits));
+			System.out.println("part one answer is " + calculatePartOneAnswer(directionUnits));
+			System.out.println("part two answer is " + calculatePartTwoAnswer(directionUnits));
+		} catch (Exception e) {
+			System.out.println("failed to calculate answer, ex=" + e);
+		}
 	}
 
 	private int calculatePartOneAnswer(List<Pair<Directions, Integer>> directionUnits) {

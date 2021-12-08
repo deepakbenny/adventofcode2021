@@ -10,37 +10,41 @@ import java.util.stream.Stream;
 /**
  * @author dbenny
  */
-public class SonarSweepDay1 {
+public class SonarSweepDay1 implements AdvofCode2021 {
 
 	private static final String INPUT_FILE = "src/main/resources/SonarSweepInput.txt";
 
-	public void process() throws IOException {
+	public void process() {
 
-		List<String> fileLines = Files.readAllLines(Paths.get(INPUT_FILE));
+		try {
 
-		int previousIndex;
-		int currentIndex;
+			List<String> fileLines = Files.readAllLines(Paths.get(INPUT_FILE));
 
-		int previousEle;
-		int currentEle;
+			int previousIndex;
+			int currentIndex;
 
-		int counter = 0;
-		for (int i = 0; i < fileLines.size(); i ++) {
+			int previousEle;
+			int currentEle;
 
-			previousIndex = i - 1;
-			currentIndex = i;
+			int counter = 0;
+			for (int i = 0; i < fileLines.size(); i ++) {
+				previousIndex = i - 1;
+				currentIndex = i;
 
-			if (previousIndex >= 0) {
-				previousEle = Integer.parseInt(fileLines.get(previousIndex));
-				currentEle = Integer.parseInt(fileLines.get(currentIndex));
+				if (previousIndex >= 0) {
+					previousEle = Integer.parseInt(fileLines.get(previousIndex));
+					currentEle = Integer.parseInt(fileLines.get(currentIndex));
 
-				if (currentEle > previousEle) {
-					counter ++;
+					if (currentEle > previousEle) {
+						counter ++;
+					}
 				}
+
 			}
+			System.out.println("number of increments="+ counter);
 
+		} catch (Exception e) {
+			System.out.println("failed to calculate answer, exception=" + e);
 		}
-
-		System.out.println("number of increments="+ counter);
 	}
 }
